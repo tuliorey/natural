@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tokenização e Stemming</title>
+  <script src="lib/index.js"></script>
+  <script>
+    function processText() {
+      var text = document.getElementById('inputText').value;
+      
+      // Tokenização
+      var tokenizer = new natural.WordTokenizer();
+      var tokens = tokenizer.tokenize(text);
+      
+      // Redução a radical
+      var stemmer = natural.PorterStemmer;
+      var stems = tokens.map(function(token) {
+        return stemmer.stem(token);
+      });
+      
+      // Exibindo os resultados
+      document.getElementById('outputTokens').textContent = tokens.join(', ');
+      document.getElementById('outputStems').textContent = stems.join(', ');
+    }
+  </script>
+</head>
+<body>
+  <h1>Tokenização e Stemming</h1>
+  
+  <textarea id="inputText" rows="4" cols="50"></textarea>
+  <button onclick="processText()">Processar</button>
+  
+  <h2>Tokens:</h2>
+  <p id="outputTokens"></p>
+  
+  <h2>Radicais:</h2>
+  <p id="outputStems"></p>
+</body>
+</html>
